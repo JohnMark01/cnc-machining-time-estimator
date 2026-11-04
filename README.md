@@ -1,47 +1,45 @@
-# CNC Machining Time Estimator Using MATLAB
+## Implementation
 
-## Project Overview
+The CNC machining time estimator is implemented in MATLAB and processes Siemens MPF part programs to estimate machining cycle times.
 
-An independently developed MATLAB-based CNC machining time estimation tool, created as my final-year BEng Mechatronic Engineering project at the University of Huddersfield.
+The current implementation includes:
 
-The project focused on estimating machining cycle times directly from Siemens MPF CNC part programs, providing an alternative to conventional CAM-based time estimation methods.
+- **CNC program parsing:** Reads `.mpf`, `.nc` and `.txt` files.
+- **Motion analysis:** Models rapid positioning, linear interpolation and circular interpolation.
+- **Acceleration modelling:** Uses trapezoidal and triangular velocity profiles to estimate movement durations.
+- **Machine operations:** Accounts for configurable tool-change, spindle start-up, coolant operation and dwell times.
+- **Modal state tracking:** Tracks feed rates, coordinate positioning modes and selected machining planes.
+- **Diagnostic logging:** Records certain unsupported CNC commands for further investigation.
+- **Results reporting:** Generates estimated machining times and comparisons against configurable reference values.
 
-## Project Objectives
+## Development Status
 
-- Develop a MATLAB program capable of interpreting CNC G-code and M-code instructions.
-- Estimate machining times by analysing tool movements and machine operations.
-- Account for machine-specific parameters, including spindle start-up delays, tool changes and rapid traverse speeds.
-- Evaluate estimated cycle times against SolidWorks CAM predictions and experimental CNC machine timings.
+**Working prototype — ongoing development**
 
-## Methodology
+This project originated as my final-year BEng Mechatronic Engineering dissertation at the University of Huddersfield.
 
-The estimator processes CNC part programs by extracting relevant commands and tracking machine operating states.
+The original academic implementation is functional and has been tested using Siemens MPF machining programs. The repository is being developed further as a personal engineering portfolio project.
 
-It calculates time contributions from supported machining movements and auxiliary operations to produce an estimated total cycle time.
+### Planned Improvements
 
-## Validation
+- Improve G-code and M-code recognition.
+- Refine circular interpolation and complex motion calculations.
+- Improve handling of machine-specific commands.
+- Introduce individual experimental reference values for each machining program.
+- Expand testing and validation using additional CNC programs.
+- Improve documentation and code organisation.
 
-The estimator was evaluated through comparisons with SolidWorks CAM timing predictions and recorded machining times from physical CNC experiments.
+### Validation Note
 
-The project investigated differences between theoretical machining estimates and real machine operation, particularly the influence of machine-specific delays.
+The estimator has been compared with experimental CNC machining timings and SolidWorks CAM predictions. Further validation and review of the reference datasets are planned before publishing final accuracy metrics.
 
-## Technologies
+## Running the Prototype
 
-- MATLAB
-- Siemens MPF / CNC G-code and M-code
-- SolidWorks CAM
-- CNC Machining
-- Mathematical Modelling
-- Experimental Validation
+The MATLAB script reads supported CNC program files from its working directory or a configured ZIP archive.
 
-## Project Status
+1. Open `cnc_time_estimator.m` in MATLAB.
+2. Review and configure the machine parameters.
+3. Place the required CNC program files in the working directory.
+4. Run the script to generate estimated machining times.
 
-Completed undergraduate final-year project.
-
-Original source code, experimental results and supporting documentation will be added as they are recovered and prepared for publication.
-
-## Author
-
-**Chinecherem John-Mark Obiajulu**
-
-BEng (Hons) Mechatronic Engineering
+**Note:** The current version uses predefined reference timings for comparison. These values should be updated to match the individual test cases before interpreting the validation results.
